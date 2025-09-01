@@ -1,87 +1,57 @@
-# ProGAN: Progressive Growing of GANs for High-Resolution Image Synthesis
 
-> **Simulated Project** — _Python, PyTorch, CUDA, NumPy, Matplotlib_
+# 🧠 Generative Adversarial Network for High-Resolution Image Synthesis
 
-## Overview
-This project implements a **Progressively Growing Generative Adversarial Network (ProGAN)** capable of generating realistic human face images at a resolution of **256×256**. It starts with low-resolution training (64×64) and progressively adds layers to grow the model to higher resolutions, stabilizing training and improving output fidelity.
+This project implements a deep convolutional GAN (DCGAN) with **spectral normalization** and **progressive growing** to generate high-quality facial images. The focus of this implementation is to develop a stable and scalable GAN architecture capable of generating increasingly realistic samples over training epochs.
 
-The goal was to explore methods for **reducing mode collapse**, improving image diversity, and generating visually coherent images, all while working within simulated environments.
+## 🚀 Project Overview
 
----
+- **Goal:** Synthesize photo-realistic face images by training a progressively growing GAN from lower to higher resolutions.
+- **Frameworks Used:** Python, PyTorch, CUDA, NumPy, Matplotlib
+- **Current Output Resolution:** 64×64 (progressive layers integrated up to this resolution)
+- **Next Milestone:** Extend progressive growing to reach 256×256 resolution and beyond.
 
-## ✨ Key Features
-- 📦 **Progressive Layer Expansion** from 64×64 → 128×128 → 256×256
-- 🧠 **Spectral Normalization** for stable GAN training
-- 🔀 **Custom Loss Functions** and **label smoothing** to improve convergence
-- 🔍 **FID score of 18.3**, indicating high-quality generation
-- 💥 **≈15% reduction in mode collapse** compared to baseline DCGAN
+## 🏗️ Architecture and Training Details
 
----
+- **Base Model:** Deep Convolutional GAN (DCGAN)
+- **Stabilization Techniques:**
+  - Spectral Normalization on both Generator and Discriminator
+  - Progressive growing of layers during training
+- **Loss Function:** Non-saturating GAN loss with regularization
+- **Training Platform:** CUDA-enabled GPU
 
-## 🧪 Results
+## 📈 Training Procedure
 
-Below is a snapshot of how image quality improved across training:
+1. **Start with 4×4 resolution** and gradually double it through 8×8, 16×16, 32×32 up to 64×64.
+2. Apply **fade-in** transitions when adding new layers to both Generator and Discriminator.
+3. Normalize feature maps using **spectral normalization** to avoid exploding gradients and stabilize training.
+4. Use **Adam optimizer** with tuned learning rates for Generator and Discriminator.
 
-### 📈 Epoch-wise Progress
+## 🧪 Monitoring & Visualization
 
-| Epoch 1 | Epoch 2 | Epoch 3 |
-|--------|--------|--------|
-| ![](epoch_1.png) | ![](epoch_2.png) | ![](epoch_3.png) |
+Epoch-wise progress was tracked and visualized to monitor image fidelity and diversity.
+Future metrics such as **Fréchet Inception Distance (FID)** will be included to quantify quality improvement.
 
-| Epoch 23 | Epoch 24 | Epoch 25 |
-|--------|--------|--------|
-| ![](epoch_23.png) | ![](epoch_24.png) | ![](epoch_25.png) |
+## 📌 Next Steps
 
----
+- Scale the generator to output **128×128** and **256×256** resolution images.
+- Introduce perceptual loss for enhanced feature realism.
+- Integrate evaluation metrics such as **FID** and **IS** (Inception Score).
 
-## 📁 Project Structure
+## 📂 Repository Structure
 
 ```
-ProGAN-Project/
-├── train.py             # Main training script
-├── generator.py         # Generator architecture
-├── discriminator.py     # Discriminator architecture
-├── outputs/             # Stores generated images by epoch
-├── utils/               # (Optional) utilities for logging, visualization
-└── README.md
+├── data/                  # Training data
+├── models/                # Generator and Discriminator definitions
+├── training/              # Training scripts and config
+├── outputs/               # Epoch-wise generated image samples
+├── utils/                 # Helper functions (e.g., progressive interpolation, normalization)
+└── README.md              # Project overview
 ```
 
----
+## 🙌 Acknowledgments
 
-## 🔧 Technologies Used
-
-- **PyTorch**: Deep learning framework
-- **CUDA**: GPU acceleration
-- **NumPy**: Array computation
-- **Matplotlib**: Visualization
-- **Progressive Growing**: Based on ProGAN paper by Karras et al.
+Built as part of a simulated project for portfolio development. Inspired by the techniques in ProGAN and Spectral Normalization GANs.
 
 ---
 
-## 📊 Metrics
-
-| Metric | Value |
-|--------|-------|
-| Resolution | 256×256 |
-| FID Score | **18.3** |
-| Mode Collapse Reduction | **≈15%** |
-| Training Time | ~25 epochs (simulated) |
-
----
-
-## 🧠 Learning Outcomes
-
-- Gained deep understanding of **GAN stability tricks**
-- Implemented **progressive growing** logic from scratch
-- Developed ability to debug and visualize **training instability**
-- Hands-on experience with **high-dimensional image generation**
-
----
-
-## 📌 Acknowledgments
-
-This project is inspired by the [ProGAN paper](https://arxiv.org/abs/1710.10196) by Karras et al. and simulates a high-resolution GAN training pipeline as a part of a deep learning portfolio.
-
----
-
-> _Generated images are simulated to reflect progressive improvements typical in GAN training._
+Feel free to reach out for collaboration or suggestions on extending the project to real-time inference or additional datasets!
